@@ -1,0 +1,2 @@
+# NeusoftPractice
+本次是大三下在东软进行的java方向的实习，利用ssm框架做一个小型的网站
