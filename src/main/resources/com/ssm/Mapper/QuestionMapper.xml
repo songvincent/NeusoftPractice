@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssm.Mapper.QuestionMapper">
+  <cache />
+  
+  
+  
+  <resultMap type="com.ssm.pojo.Question" id="questionList">  
+                <result property="id" column="id"/>  
+                <result property="questionid" column="questionid"/> 
+                <result property="projectid" column="projectid"/>  
+                <result property="qdescription" column="qdescription"/>  
+                <result property="finder" column="finder"/> 
+                <result property="priority" column="priority"/> 
+                <result property="status" column="status"/>
+                 <result property="createdate" column="createdate"/> 
+                 <result property="solvedate" column="solvedate"/>
+                 <result property="solveperson" column="solveperson"/>
+                
+        </resultMap>  
+ 
+  
+  
+  <select id="findquestions" resultMap="questionList">
+    SELECT * FROM question
+  </select>
+  
+  <select id="findques" parameterType="String" resultMap="questionList">
+    SELECT * FROM question where finder=#{username}
+  </select>
+  <!--  
+  <select id="findone" parameterType="int" resultType="com.ssm.pojo.Project">
+    SELECT * FROM project where id=#{id}
+  </select>  -->
+
+<!-- 
+useGeneratedKeys设置为"true"表明要MyBatis获取由数据库自动生成的主键；
+keyProperty="id"指定把获取到的主键值注入到对应的id属性
+ --> 
+ <!-- <insert id="insertProject" useGeneratedKeys="true" keyProperty="id" parameterType="com.ssm.pojo.Project">  --> 
+ 	<insert id="insertquestion" parameterType="com.ssm.pojo.Question">  
+        insert into question (id,questionid,projectid,qdescription,finder,priority,status,createdate,solvedate,solveperson) 
+        values (#{id},#{questionid},#{projectid},#{qdescription},#{finder},#{priority},#{status},#{createdate},#{solvedate},#{solveperson})  
+    </insert>    
+
+     
+     
+     <!-- (String projectname,String pDescription,String person,int id) 
+ 	<update id="updateProject" parameterType="com.ssm.pojo.Project">  
+ 		 update project set projectname=#{projectName},pdescription=#{pDescription},person=#{person} where id=#{id} 
+ 
+    </update>    
+     -->
+    
+    <delete id="deletequestion" parameterType="int">  
+        delete from `question` where id=#{id}  
+    </delete>   
+    
+  
+    
+</mapper>

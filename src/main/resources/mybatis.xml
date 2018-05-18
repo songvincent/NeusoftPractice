@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+   
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />  
+                <property name="url" value="jdbc:mysql://localhost/sheng" />  
+                <property name="username" value="root" />  
+                <property name="password" value="19970206" /> 
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+   
+       <!-- <mapper resource="com/mybatis/os/mapper/questionMapper.xml"/>   
+       <mapper resource="com/mybatis/os/mapper/questionMapper.xml"/>   -->
+       <!-- 调用下面语句时，需要questionMapper的类与xml全路径完全一样，即名字一样，包名也要一样
+        -->
+        
+       <mapper class="com.ssm.Mapper.ProjectMapper"/> 
+       <mapper class="com.ssm.Mapper.UserMapper"/>
+        <mapper class="com.ssm.Mapper.QuestionMapper"/>
+        <mapper class="com.ssm.Mapper.ItemMapper"/>
+      <!--   <mapper class="com.ssm.Dao.StudentMapper" />
+       <mapper class="com.ssm.Dao.CourseMapper" />
+       <mapper class="com.ssm.Dao.SolutionMapper" />
+       <mapper class="com.ssm.Dao.FileMapper" />
+         -->
+    </mappers>
+</configuration>

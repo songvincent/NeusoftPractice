@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssm.Mapper.ProjectMapper">
+  <cache />
+  
+  
+  
+  <resultMap type="com.ssm.pojo.Project" id="projectList">  
+                <result property="id" column="id"/>  
+                <result property="projectId" column="projectid"/>  
+                <result property="keyword" column="keyword"/>  
+                <result property="projectName" column="projectname"/> 
+                <result property="pDescription" column="pdescription"/> 
+                <result property="createDate" column="createdate"/>
+                 <result property="person" column="person"/> 
+                
+        </resultMap>  
+ 
+  
+  
+  <select id="findProject" resultMap="projectList">
+    SELECT * FROM project
+  </select>
+  
+  <select id="findone" parameterType="int" resultType="com.ssm.pojo.Project">
+    SELECT * FROM project where id=#{id}
+  </select>
+
+<!-- 
+useGeneratedKeys设置为"true"表明要MyBatis获取由数据库自动生成的主键；
+keyProperty="id"指定把获取到的主键值注入到对应的id属性
+ --> 
+ <!-- <insert id="insertProject" useGeneratedKeys="true" keyProperty="id" parameterType="com.ssm.pojo.Project">  --> 
+	<insert id="insertProject" parameterType="com.ssm.pojo.Project">  
+        insert into project (id,projectid,keyword,projectname,pdescription,createdate,person) values (#{id},#{projectId},#{keyword},#{projectName},#{pDescription},#{createDate},#{person})  
+    </insert>  
+
+     
+     
+     <!-- (String projectname,String pDescription,String person,int id) -->
+ 	<update id="updateProject" parameterType="com.ssm.pojo.Project">  
+ 		 update project set projectname=#{projectName},pdescription=#{pDescription},person=#{person} where id=#{id} 
+ 
+    </update>    
+     
+     
+    <delete id="deleteProject" parameterType="int">  
+        delete from `project` where id=#{id}  
+    </delete> 
+    
+  
+    
+</mapper>

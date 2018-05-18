@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssm.Mapper.UserMapper">
+  <cache />
+  
+  
+  
+  <resultMap type="com.ssm.pojo.User" id="userList">  
+  
+                <result property="id" column="id"/>  
+                <result property="userName" column="username"/>  
+                <result property="userPwd" column="userpwd"/>  
+                <result property="realName" column="realname"/> 
+                <result property="email" column="email"/> 
+                <result property="roleid" column="role_id"/>
+                
+        </resultMap>  
+ 
+  
+  
+  <select id="findusers" resultMap="userList">
+    SELECT * FROM user
+  </select>
+  
+
+  <select id="findOne" parameterType="int" resultType="com.ssm.pojo.User">
+    SELECT * FROM user where id=#{id}
+  </select>
+  
+  <select id="findpwd" parameterType="String" resultType="com.ssm.pojo.User">
+    SELECT * FROM user where username=#{username}
+  </select>
+
+
+<!-- 
+useGeneratedKeys设置为"true"表明要MyBatis获取由数据库自动生成的主键；
+keyProperty="id"指定把获取到的主键值注入到对应的id属性
+ --> 
+ <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ssm.pojo.User">  
+	 <!--   <insert id="insertProject" parameterType="com.ssm.pojo.Project">   -->
+        insert into user (id,username,userpwd,realname,email,role_id) values (#{id},#{userName},#{userPwd},#{realName},#{email},#{roleid})  
+    </insert>      
+
+     
+     
+     <!-- (String projectname,String pDescription,String person,int id)  -->
+ 	<update id="updateUser" parameterType="com.ssm.pojo.User">  
+ 		 update user set username=#{userName},realname=#{realName},email=#{email} where id=#{id} 
+ 
+    </update>     
+     
+   
+     
+    <delete id="deleteUser" parameterType="int">  
+        delete from `user` where id=#{id}  
+    </delete>   
+    
+  
+    
+</mapper>
